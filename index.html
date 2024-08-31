@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshola Vanik Samaj Phone Directory</title>
+    <style>
+        /* Background image */
+        body {
+            background: url('https://i.pinimg.com/474x/eb/12/07/eb1207db6cb169dfc25f7fe8adf83673.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        /* Center the form on the page */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Form styling */
+        form {
+            background: rgba(0, 0, 0, 0.5); /* Transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Headings styling */
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #FFD700; /* Gold color for headings */
+        }
+
+        /* Label and input styling */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+// Middleware to parse form data
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+// Serve the HTML form
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Handle form submission
+app.post('/submit', (req, res) => {
+    const formData = req.body;
+
+    // Save the data to a JSON file
+    const filePath = path.join(__dirname, 'data', 'formData.json');
+    fs.writeFileSync(filePath, JSON.stringify(formData, null, 2));
+
+    res.send('Form data saved successfully!');
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent input fields */
+        }
+
+        input[type="submit"], button {
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/submit" method="post">
+            <h1>Harshola Vanik Samaj Phone Directory</h1>
+            <h2>Register Yourself Here</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            
+            <label for="officeAddress">Office Address:</label>
+            <input type="text" id="officeAddress" name="officeAddress" placeholder="Enter your office address" required>
+            
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            
+            <label for="Mnumber">Mobile Number:</label>
+            <input type="tel" id="Mnumber" name="Mnumber" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required>
+    
+            <label for="status">Marital Status:</label>
+            <select id="status" name="status" required>
+                <option value="" disabled selected>Select your marital status</option>
+                <option value="married">Married</option>
+                <option value="unmarried">Unmarried</option>
+                <option value="widow">Widow</option>
+            </select>
+    
+            <label for="education">Education Qualification:</label>
+            <input type="text" id="education" name="education" placeholder="Enter your highest qualification" required>
+            
+            <label for="blood">Blood Group:</label>
+            <input type="text" id="blood" name="blood" placeholder="Enter your blood group" required>
+            
+            <label for="guru">Guru Grah:</label>
+            <input type="text" id="guru" name="guru" placeholder="Enter your Guru Grah" required>
+    
+            <!-- Buttons -->
+            <input type="submit" value="Submit">
+            <button type="reset">Cancel</button>
+            <button type="button" onclick="modifyForm()">Modify</button>
+        </form>
+        
+    </div>
+
+    <script>
+        function modifyForm() {
+            // Allow users to modify the form by enabling all fields
+            const formElements = document.querySelectorAll('form input, form select');
+            formElements.forEach(element => {
+                element.disabled = false;
+            });
+            alert('You can now modify the form fields.');
+        }
+    </script>
+</body>
+</html>
+
